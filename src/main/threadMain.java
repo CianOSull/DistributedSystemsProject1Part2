@@ -11,7 +11,7 @@ public class threadMain {
         fileObserver fileOb = new fileObserver();
 
         // Villain Thread
-        villainThread villainTh = new villainThread();
+        villainThread villainTh = new villainThread(2);
 
         // Add observer to the class
         fileOberv.addObserver(fileOb);
@@ -22,5 +22,12 @@ public class threadMain {
 
         observeThread.start();
         vilThread.start();
+
+        // Make sure main thread waits until vil thread is done
+        try {
+            vilThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

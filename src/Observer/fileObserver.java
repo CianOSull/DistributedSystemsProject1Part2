@@ -1,13 +1,11 @@
 package Observer;
 
-import Factory.flyHeroFactory;
 import Threading.heroThread;
 
 import java.io.File;
 import java.io.IOException;
 
 public class fileObserver implements Observer, Runnable {
-    private flyHeroFactory flyHeroFact = new flyHeroFactory();
     private String absolutePath = "/home/cianosullivan/Desktop/CIT/3rd Year/Semester 1/Java projects/" +
             "DistributedSystemsProject1Part2/src/battleZones/battle.txt";
     private boolean checkFile;
@@ -49,8 +47,9 @@ public class fileObserver implements Observer, Runnable {
     }
 
     private void moveFile(){
-        checkFile = file.renameTo(new File("//home/cianosullivan/Desktop/CIT/3rd Year/Semester 1" +
-                "/Java projects/DistributedSystemsProject1Part2/src/battleDone/battle" + fileCounter + ".txt"));
+        checkFile = file.renameTo(new File("/home/cianosullivan/Desktop/CIT/3rd Year/Semester 1" +
+                "/Java projects/DistributedSystemsProject1Part2/src/battlesDone" +
+                "/battle" + Integer.toString(fileCounter) + ".txt"));
         if(checkFile){
             System.out.println("Was successful");
             // Create a new file to be used

@@ -15,29 +15,42 @@ public class villainThread implements  Runnable {
             "/DistributedSystemsProject1Part2/src/battleZones/battle.txt";
     private boolean checkFile;
     private File file = new File(absolutePath);
+    private int amountOfVillains;
+
+    public villainThread(int n){
+        this.amountOfVillains = n;
+    }
 
     public void run() {
-        System.out.println("Villain Thread has started");
+        for (int i = 0; i < amountOfVillains; i++){
+            System.out.println("Villain Thread  number >>>: " + i+1 + " has started");
 
-        createFile();
+            createFile();
 
-        try {
-            //Saving of object in a file
-            FileOutputStream file = new FileOutputStream(absolutePath);
-            ObjectOutputStream out = new ObjectOutputStream(file);
+            try {
+                //Saving of object in a file
+                FileOutputStream file = new FileOutputStream(absolutePath);
+                ObjectOutputStream out = new ObjectOutputStream(file);
 
-            // Method for serialization of object
-            out.writeObject(flyVil);
-            System.out.println("The villain has been placed into the battle zone");
+                // Method for serialization of object
+                out.writeObject(flyVil);
+                System.out.println("The villain has been placed into the battle zone");
 
-            out.close();
-            file.close();
-        }
-        catch (Exception e) {
-            // printStackTrace method
-            e.printStackTrace();
-            // Prints what exception has been thrown
-            System.out.println(e);
+                out.close();
+                file.close();
+            } catch (Exception e) {
+                // printStackTrace method
+                e.printStackTrace();
+                // Prints what exception has been thrown
+                System.out.println(e);
+            }
+
+            // Make this thread sleep before the next activatation
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
