@@ -36,6 +36,7 @@ public class fileObservable implements Observable {
     }
 
     public void watchDirectory() {
+        System.out.println("Watch directory has started");
         // This watch directory will only be called once so it is fine for the start up
         // Creates a file on startup just to make sure there is something in the directory it can watch
         createFile();
@@ -59,12 +60,10 @@ public class fileObservable implements Observable {
                     //process
                     System.out.println("Event kind:" + event.kind() + ". File affected: " + event.context() + ".");
                     if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY){
-                        // False so it makes a villain
-                        notifyObservs();
+                        System.out.println("File has been changed");
+                        //notifyObservs();
                         //break;
                     }
-                    // This creates a hero
-
                     break;
                 }
                 key.reset();

@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class fileObserver implements Observer, Runnable {
     private flyHeroFactory flyHeroFact = new flyHeroFactory();
-    private String absolutePath = "/home/cianosullivan/Desktop/CIT/3rd Year/Semester 1/Java projects" +
-            "/DistributedSystemsProject1Part2/src/battleZones/battle.txt";
+    private String absolutePath = "/home/cianosullivan/Desktop/CIT/3rd Year/Semester 1/Java projects/" +
+            "DistributedSystemsProject1Part2/src/battleZones/battle.txt";
     private boolean checkFile;
     private File file = new File(absolutePath);
     private int fileCounter = 1;
@@ -17,6 +17,7 @@ public class fileObserver implements Observer, Runnable {
     private Thread threadCreateHero = new Thread(heroThread);
 
     public void run(){
+        System.out.println("Observer Thread has started");
         update();
     }
 

@@ -13,6 +13,7 @@ public class threadMain {
         villainThread villainTh = new villainThread();
         Thread vilThread = new Thread(villainTh);
         fileOberv.watchDirectory();
+        System.out.println("Got past watchdirectory");
         vilThread.start();
     }
 }
