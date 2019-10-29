@@ -14,10 +14,14 @@ public class fileObserver implements Observer, Runnable {
     private File file = new File(absolutePath);
     private int fileCounter = 1;
     private heroThread heroThread = new heroThread();
-    private Thread threadCreateHero = new Thread(heroThread);
 
     public void run(){
         System.out.println("Observer Thread has started");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         update();
     }
 
@@ -38,6 +42,7 @@ public class fileObserver implements Observer, Runnable {
 
     private void update() {
         // this creates a thread that creates a hero and puts it into the file
+        Thread threadCreateHero = new Thread(heroThread);
         threadCreateHero.start();
         // This should move the file to a new location
         moveFile();

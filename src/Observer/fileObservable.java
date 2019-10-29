@@ -4,19 +4,25 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 
-public class fileObservable implements Observable {
+public class fileObservable implements Observable, Runnable {
     private fileObserver fileOb;
     private File battleFile = new File("/home/cianosullivan/Desktop/CIT/3rd Year/Semester 1/Java projects" +
             "/DistributedSystemsProject1Part2/src/battleZones/battle.txt");
     private Thread threadObserver;
     private boolean checkFile;
 
+    public void run(){
+        System.out.println("Observable Thread start");
+        watchDirectory();
+    }
+
     public void addObserver(fileObserver observer) {
         this.fileOb = observer;
-        threadObserver = new Thread(fileOb);
+
     }
 
     private void notifyObservs() {
+        threadObserver = new Thread(fileOb);
         threadObserver.start();
     }
 
@@ -35,8 +41,7 @@ public class fileObservable implements Observable {
         }
     }
 
-    public void watchDirectory() {
-        System.out.println("Watch directory has started");
+    private void watchDirectory() {
         // This watch directory will only be called once so it is fine for the start up
         // Creates a file on startup just to make sure there is something in the directory it can watch
         createFile();
@@ -58,11 +63,9 @@ public class fileObservable implements Observable {
             while ((key = watchService.take()) != null) {
                 for (WatchEvent<?> event : key.pollEvents()) {
                     //process
-                    System.out.println("Event kind:" + event.kind() + ". File affected: " + event.context() + ".");
+                    //System.out.println("Event kind:" + event.kind() + ". File affected: " + event.context() + ".");
                     if(event.kind() == StandardWatchEventKinds.ENTRY_MODIFY){
-                        System.out.println("File has been changed");
-                        //notifyObservs();
-                        //break;
+                        notifyObservs();
                     }
                     break;
                 }

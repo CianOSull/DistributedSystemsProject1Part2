@@ -17,6 +17,8 @@ public class villainThread implements  Runnable {
     private File file = new File(absolutePath);
 
     public void run() {
+        System.out.println("Villain Thread has started");
+
         createFile();
 
         try {

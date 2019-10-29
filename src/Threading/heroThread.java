@@ -11,6 +11,8 @@ public class heroThread implements  Runnable {
 
     public void run() {
         try {
+            System.out.println("Hero Thread has started");
+
             //Saving of object in a file
             String absolutePath = "/home/cianosullivan/Desktop/CIT/3rd Year/Semester 1/Java projects" +
                     "/DistributedSystemsProject1Part2/src/battleZones/battle.txt";

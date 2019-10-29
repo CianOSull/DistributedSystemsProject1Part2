@@ -9,6 +9,6 @@ public interface Observable {
     // Notify the observers
     private void notifyObservs(boolean makeHero) {}
 
-    public void watchDirectory();
+    private void watchDirectory(){};
 
 }
